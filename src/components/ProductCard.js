@@ -1,10 +1,9 @@
-// src/components/ProductCard.js
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../styles/components/productcard.scss';
 
 const ProductCard = ({ product }) => {
   return (
+    // ici je crée le composant pour afficher les cartes de produits
     <div className="product-card">
       <div className="product-image">
         <img src={product.image} alt={product.title} />
@@ -16,9 +15,9 @@ const ProductCard = ({ product }) => {
         <p className="product-price">${product.price}</p>
         
         <div className="product-actions">
-          <Link to={`/product/${product.id}`} className="btn-view">
+          <a href={`/product/${product.id}`} className="btn-view">
             View item
-          </Link>
+          </a>
         </div>
       </div>
     </div>

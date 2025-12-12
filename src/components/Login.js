@@ -1,8 +1,7 @@
-// src/components/Login.js
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Tools/firebaseConfig';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import '../styles/components/login.scss';
 
 const Login = () => {
@@ -10,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  //const history = useHistory();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,10 +18,10 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // Redirection vers la page des produits après connexion réussie
+      //ici je modifie la redirection après connexion
       window.location.href = '/products';
     } catch (err) {
-      // Gestion des erreurs
+      // ici on gère les erreurs
       if (err.code === 'auth/user-not-found') {
         setError('Aucun utilisateur trouvé avec cet email.');
       } else if (err.code === 'auth/wrong-password') {
@@ -41,6 +40,7 @@ const Login = () => {
   };
 
   return (
+    // ici c'est le retour du formulaire de connexion
     <div className="login-container">
       <div className="login-box">
         <h2>Connexion</h2>

@@ -1,13 +1,18 @@
-// src/Pages/Connexion.js
 import React, { useState } from 'react';
 import Login from '../components/Login';
 import Register from '../components/Register';
+import Logo from '../components/Logo';
 
 const Connexion = () => {
   const [showLogin, setShowLogin] = useState(true);
 
   return (
     <div className="connexion-page">
+      {/* Logo centré en haut */}
+      <div className="connexion-logo">
+        <Logo />
+      </div>
+
       <div className="auth-toggle">
         <button
           className={showLogin ? 'active' : ''}

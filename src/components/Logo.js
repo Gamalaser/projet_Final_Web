@@ -1,13 +1,16 @@
-// src/components/Logo.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { auth } from '../Tools/firebaseConfig';
 import '../styles/components/logo.scss';
 
 const Logo = () => {
+  const user = auth.currentUser;
+  
   return (
-    <Link to="/products" className="logo">
-      <h1>🛍️ OnlineStore</h1>
-    </Link>
+    //ici je modifie le lien du logo en fonction de la connexion de l'utilisateur 
+    //pour éviter l'accès aux produits sans connexion
+    <a href={user ? "/products" : "#"} className="logo">
+      <img src={process.env.PUBLIC_URL + '/logo.png'} alt="OnlineStore Logo" />
+    </a>
   );
 };
 

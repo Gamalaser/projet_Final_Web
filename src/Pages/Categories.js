@@ -1,4 +1,3 @@
-// src/Pages/Categories.js
 import React, { useState, useEffect } from 'react';
 import { getAllProducts, getAllCategories, getProductsByCategory } from '../Tools/Api';
 import ProductCard from '../components/ProductCard';

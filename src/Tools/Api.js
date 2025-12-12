@@ -1,10 +1,9 @@
-// src/Tools/api.js
 import axios from 'axios';
 
 const FAKESTORE_API = 'https://fakestoreapi.com';
-const JSON_SERVER_URL = 'http://localhost:3001'; // JSON Server pour le panier
+const JSON_SERVER_URL = 'http://localhost:5000'; // JSON Server pour le panier
 
-// ===== PRODUITS =====
+// ===== PRODUITS (Fake Store API) =====
 
 // Récupérer tous les produits
 export const getAllProducts = async () => {
@@ -51,7 +50,6 @@ export const getProductById = async (id) => {
 };
 
 // ===== PANIER (JSON Server) =====
-
 // Récupérer le panier d'un utilisateur
 export const getCart = async (emailUser) => {
   try {
@@ -79,6 +77,7 @@ export const removeFromCart = async (cartItemId) => {
   try {
     const response = await axios.delete(`${JSON_SERVER_URL}/cart/${cartItemId}`);
     return response.data;
+    //gestion d'erreur
   } catch (error) {
     console.error('Erreur lors de la suppression du panier:', error);
     throw error;

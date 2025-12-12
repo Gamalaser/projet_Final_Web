@@ -1,8 +1,7 @@
-// src/components/Register.js
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Tools/firebaseConfig';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import '../styles/components/register.scss';
 
 const Register = () => {
@@ -11,7 +10,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  //const history = useHistory();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -23,7 +22,7 @@ const Register = () => {
       return;
     }
 
-    // Vérifier la longueur du mot de passe
+    // ici faut Vérifier la longueur du mot de passe
     if (password.length < 6) {
       setError('Le mot de passe doit contenir au moins 6 caractères.');
       return;
@@ -36,7 +35,7 @@ const Register = () => {
       // Redirection vers la page des produits après inscription réussie
       window.location.href = '/products';
     } catch (err) {
-      // Gestion des erreurs
+      // ici on gère les erreurs
       if (err.code === 'auth/email-already-in-use') {
         setError('Cet email est déjà utilisé.');
       } else if (err.code === 'auth/invalid-email') {
@@ -52,6 +51,7 @@ const Register = () => {
     }
   };
 
+  // ici c'est le retour du formulaire d'inscription
   return (
     <div className="register-container">
       <div className="register-box">

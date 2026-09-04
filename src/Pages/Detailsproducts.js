@@ -12,43 +12,42 @@ const Detailsproducts = () => {
   const [addingToCart, setAddingToCart] = useState(false);
 
   useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const data = await getProductById(id);
+        setProduct(data);
+        setError('');
+      } catch (err) {
+        setError('Erreur lors du chargement du produit');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchProduct();
   }, [id]);
-
-  const fetchProduct = async () => {
-    try {
-      setLoading(true);
-      const data = await getProductById(id);
-      setProduct(data);
-      setError('');
-    } catch (err) {
-      setError('Erreur lors du chargement du produit');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleAddToCart = async () => {
     try {
       setAddingToCart(true);
       const userEmail = auth.currentUser?.email;
-      
-      // NE PAS mettre d'ID ici - JSON Server le génère automatiquement
+
       const cartItem = {
         emailUser: userEmail,
         image: product.image,
         title: product.title,
         category: product.category,
         price: product.price,
-        productId: product.id  // Garde l'ID du produit dans un champ séparé
+        productId: product.id
       };
 
       await addToCart(cartItem);
       alert('Produit ajouté au panier !');
     } catch (err) {
       console.error('Erreur lors de l\'ajout au panier:', err);
-      alert('Erreur lors de l\'ajout au panier. Assurez-vous que JSON Server est lancé.');
+      alert('Erreur lors de l\'ajout au panier.');
     } finally {
       setAddingToCart(false);
     }
@@ -71,7 +70,7 @@ const Detailsproducts = () => {
 
         <div className="product-info-detailed">
           <h1>{product.title}</h1>
-          
+
           <div className="product-category">
             <span>Catégorie:</span>
             <span className="category-name">{product.category}</span>
@@ -88,7 +87,7 @@ const Detailsproducts = () => {
             ${product.price}
           </div>
 
-          <button 
+          <button
             className="btn-add-to-cart"
             onClick={handleAddToCart}
             disabled={addingToCart}
